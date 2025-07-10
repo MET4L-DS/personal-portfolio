@@ -1,9 +1,25 @@
-import { Button } from "@/components/ui/button";
+import {
+	Hero,
+	About,
+	Projects,
+	Experience,
+	Certifications,
+	Contact,
+	Navigation,
+} from "./components";
 
 function App() {
 	return (
-		<div className="flex min-h-svh flex-col items-center justify-center">
-			<Button>Click me</Button>
+		<div className="min-h-screen bg-background">
+			<Navigation />
+			<main>
+				<Hero />
+				<About />
+				<Projects />
+				<Experience />
+				<Certifications />
+				<Contact />
+			</main>
 		</div>
 	);
 }
