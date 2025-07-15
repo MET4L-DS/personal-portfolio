@@ -52,30 +52,6 @@ export function Projects() {
 			liveUrl: "#",
 			color: "from-orange-500 to-red-500",
 		},
-		{
-			title: "Event & Registration CMS",
-			description:
-				"A comprehensive client-facing system with React frontend and Express backend, handling multi-image uploads, event and user management, dynamic PDF generation, and JWT-based admin authentication.",
-			icon: ExternalLink,
-			technologies: [
-				"React.js",
-				"Express.js",
-				"MongoDB",
-				"JWT",
-				"react-pdf",
-				"Cloudinary",
-			],
-			features: [
-				"Multi-image upload functionality",
-				"Event and user management system",
-				"Dynamic PDF generation with react-pdf",
-				"JWT-based admin authentication",
-				"Comprehensive dashboard interface",
-			],
-			githubUrl: "#",
-			liveUrl: "#",
-			color: "from-purple-500 to-pink-500",
-		},
 	];
 
 	return (
@@ -98,7 +74,7 @@ export function Projects() {
 					</p>
 				</motion.div>
 
-				<div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
+				<div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 					{projects.map((project, index) => (
 						<motion.div
 							key={project.title}
