@@ -2,7 +2,14 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Brain, MessageCircle } from "lucide-react";
+import {
+	Github,
+	ExternalLink,
+	Brain,
+	MessageCircle,
+	Activity,
+	User,
+} from "lucide-react";
 
 export function Projects() {
 	const fadeInVariants = {
@@ -11,6 +18,33 @@ export function Projects() {
 	};
 
 	const projects = [
+		{
+			title: "Pharmacy Management System",
+			description:
+				"A comprehensive web-based pharmacy management system designed for medical stores in India. Built as part of MCA coursework, it provides complete inventory management, billing, medicine tracking, and customer service automation with real-time stock monitoring and expiry alerts.",
+			icon: Activity,
+			technologies: [
+				"React.js",
+				"TypeScript",
+				"Django",
+				"MySQL",
+				"TailwindCSS",
+				"ShadCN UI",
+				"Vite",
+				"Django REST Framework",
+			],
+			features: [
+				"Complete inventory management with batch tracking",
+				"Real-time stock monitoring with low stock alerts",
+				"Medicine search with API integration for suggestions",
+				"Responsive design with dark/light theme support",
+				"GST & HSN code support for Indian tax compliance",
+				"Interactive dashboard with analytics and insights",
+			],
+			githubUrl: "https://github.com/berealatul/projectDBMS",
+			liveUrl: "#",
+			color: "from-green-500 to-blue-500",
+		},
 		{
 			title: "LawGPT",
 			description:
@@ -31,8 +65,8 @@ export function Projects() {
 				"Responsive design with TailwindCSS",
 				"Deployed on Google Cloud Platform",
 			],
-			githubUrl: "#",
-			liveUrl: "#",
+			githubUrl: "https://github.com/MET4L-DS/AskMe",
+			liveUrl: "https://law-gpt.netlify.app/",
 			color: "from-blue-500 to-cyan-500",
 		},
 		{
@@ -48,9 +82,36 @@ export function Projects() {
 				"Efficient server-side communication",
 				"Visually appealing design",
 			],
-			githubUrl: "#",
-			liveUrl: "#",
+			githubUrl: "https://github.com/POBOROJO/Kanha-GPT",
+			liveUrl: "https://kanha-gpt.netlify.app/",
 			color: "from-orange-500 to-red-500",
+		},
+		{
+			title: "Personal Portfolio Website",
+			description:
+				"A modern, responsive personal portfolio website showcasing my journey as a full-stack MERN developer and MCA student. Built with React, TypeScript, and modern web technologies to demonstrate my skills, projects, and professional experience with smooth animations and dark/light theme support.",
+			icon: User,
+			technologies: [
+				"React.js",
+				"TypeScript",
+				"Vite",
+				"TailwindCSS",
+				"ShadCN UI",
+				"Framer Motion",
+				"Lucide React",
+				"ESLint",
+			],
+			features: [
+				"Responsive design with mobile-first approach",
+				"Dark/light theme toggle with system preference detection",
+				"Smooth animations powered by Framer Motion",
+				"Modern UI with ShadCN components and glassmorphism effects",
+				"Component-based architecture with TypeScript",
+				"SEO-ready with semantic HTML structure",
+			],
+			githubUrl: "https://github.com/MET4L-DS/personal-portfolio",
+			liveUrl: "https://ayanshu.vercel.app/",
+			color: "from-indigo-500 to-purple-500",
 		},
 	];
 
@@ -74,7 +135,7 @@ export function Projects() {
 					</p>
 				</motion.div>
 
-				<div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+				<div className="grid md:grid-cols-2 xl:grid-cols-2 gap-8 max-w-7xl mx-auto">
 					{projects.map((project, index) => (
 						<motion.div
 							key={project.title}
