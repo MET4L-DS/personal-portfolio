@@ -70,7 +70,7 @@ export function Navigation() {
 					</Button>
 					<Button size="sm" variant="ghost" asChild>
 						<a
-							href="https://linkedin.com"
+							href="https://www.linkedin.com/in/ayanshu-dev-sikdar-117792249/"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -139,7 +139,7 @@ export function Navigation() {
 						</Button>
 						<Button size="sm" variant="ghost" asChild>
 							<a
-								href="https://linkedin.com"
+								href="https://www.linkedin.com/in/ayanshu-dev-sikdar-117792249/"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
