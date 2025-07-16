@@ -122,28 +122,6 @@ export function Hero() {
 									},
 								}}
 							/>
-
-							{/* Sparkle Effects */}
-							{[...Array(6)].map((_, i) => (
-								<motion.div
-									key={i}
-									className="absolute w-2 h-2 bg-primary rounded-full"
-									style={{
-										left: `${20 + Math.random() * 60}%`,
-										top: `${20 + Math.random() * 60}%`,
-									}}
-									animate={{
-										scale: [0, 1, 0],
-										opacity: [0, 1, 0],
-									}}
-									transition={{
-										duration: 2,
-										repeat: Infinity,
-										ease: "easeInOut",
-										delay: i * 0.3,
-									}}
-								/>
-							))}
 						</div>
 					</motion.div>
 

@@ -116,8 +116,39 @@ export function Projects() {
 	];
 
 	return (
-		<section id="projects" className="py-20 px-4 bg-muted/30">
-			<div className="container mx-auto">
+		<section
+			id="projects"
+			className="py-20 px-4 bg-gradient-to-b from-muted/30 to-background relative overflow-hidden"
+		>
+			{/* Animated background elements */}
+			<div className="absolute inset-0 overflow-hidden">
+				<div className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/5 rounded-full blur-3xl animate-pulse" />
+				<div className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-secondary/5 rounded-full blur-3xl animate-pulse" />
+				<div className="absolute top-1/2 right-1/3 w-24 h-24 bg-purple-500/5 rounded-full blur-3xl animate-pulse" />
+
+				{/* Floating particles */}
+				{[...Array(15)].map((_, i) => (
+					<motion.div
+						key={i}
+						className="absolute w-1 h-1 bg-primary/20 rounded-full"
+						style={{
+							left: `${Math.random() * 100}%`,
+							top: `${Math.random() * 100}%`,
+						}}
+						animate={{
+							y: [-20, 20, -20],
+							opacity: [0.3, 1, 0.3],
+						}}
+						transition={{
+							duration: 3 + Math.random() * 2,
+							repeat: Infinity,
+							delay: i * 0.2,
+						}}
+					/>
+				))}
+			</div>
+
+			<div className="container mx-auto relative z-10">
 				<motion.div
 					initial="hidden"
 					whileInView="visible"
@@ -126,13 +157,33 @@ export function Projects() {
 					variants={fadeInVariants}
 					className="text-center mb-16"
 				>
-					<h2 className="text-3xl md:text-4xl font-bold mb-4">
+					<motion.h2
+						className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent"
+						animate={{
+							backgroundPosition: [
+								"0% 50%",
+								"100% 50%",
+								"0% 50%",
+							],
+						}}
+						transition={{
+							duration: 4,
+							repeat: Infinity,
+							ease: "easeInOut",
+						}}
+					>
 						Featured Projects
-					</h2>
-					<p className="text-muted-foreground max-w-2xl mx-auto">
+					</motion.h2>
+					<motion.p
+						className="text-muted-foreground max-w-2xl mx-auto text-lg"
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ delay: 0.2 }}
+					>
 						A showcase of full-stack applications demonstrating my
 						expertise in modern web technologies
-					</p>
+					</motion.p>
 				</motion.div>
 
 				<div className="grid md:grid-cols-2 xl:grid-cols-2 gap-8 max-w-7xl mx-auto">
@@ -144,97 +195,164 @@ export function Projects() {
 							viewport={{ once: true }}
 							transition={{ duration: 0.8, delay: index * 0.2 }}
 							variants={fadeInVariants}
-							whileHover={{ y: -5 }}
+							whileHover={{
+								y: -10,
+								transition: { duration: 0.3 },
+							}}
 							className="h-full"
 						>
-							<Card className="h-full flex flex-col overflow-hidden group hover:shadow-xl transition-all duration-300">
-								<CardHeader className="pb-4">
-									<div className="flex items-center space-x-3 mb-3">
-										<div
-											className={`p-2 rounded-lg bg-gradient-to-r ${project.color} text-white`}
-										>
-											<project.icon className="h-6 w-6" />
+							<Card className="h-full flex flex-col overflow-hidden group hover:shadow-2xl transition-all duration-500 bg-background/80 backdrop-blur-sm border-border/50">
+								{/* Card Header with animated gradient */}
+								<div className="relative py-3">
+									<div
+										className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-10 group-hover:opacity-20 transition-all duration-300`}
+									/>
+									<CardHeader className="pb-4 relative z-10">
+										<div className="flex items-center space-x-3 mb-3">
+											<motion.div
+												className={`p-3 rounded-xl bg-gradient-to-r ${project.color} text-white shadow-lg`}
+												whileHover={{
+													scale: 1.1,
+													rotate: 360,
+													transition: {
+														duration: 0.5,
+													},
+												}}
+											>
+												<project.icon className="h-6 w-6" />
+											</motion.div>
+											<CardTitle className="text-xl font-bold">
+												{project.title}
+											</CardTitle>
 										</div>
-										<CardTitle className="text-xl">
-											{project.title}
-										</CardTitle>
-									</div>
-									<p className="text-muted-foreground text-sm leading-relaxed">
-										{project.description}
-									</p>
-								</CardHeader>
+										<p className="text-muted-foreground text-sm leading-relaxed">
+											{project.description}
+										</p>
+									</CardHeader>
+								</div>
 
-								<CardContent className="flex-1 flex flex-col space-y-4">
+								<CardContent className="flex-1 flex flex-col space-y-6 p-6">
 									<div>
-										<h4 className="font-semibold mb-2 text-sm">
+										<h4 className="font-semibold mb-3 text-sm flex items-center gap-2">
+											<div className="w-2 h-2 bg-primary rounded-full" />
 											Key Features:
 										</h4>
-										<ul className="text-sm text-muted-foreground space-y-1">
+										<ul className="text-sm text-muted-foreground space-y-2">
 											{project.features.map(
 												(feature, idx) => (
-													<li
+													<motion.li
 														key={idx}
 														className="flex items-start space-x-2"
+														initial={{
+															opacity: 0,
+															x: -10,
+														}}
+														whileInView={{
+															opacity: 1,
+															x: 0,
+														}}
+														viewport={{
+															once: true,
+														}}
+														transition={{
+															delay: idx * 0.1,
+														}}
 													>
-														<span className="text-primary mt-1">
-															•
+														<span className="text-primary mt-1 text-xs">
+															▶
 														</span>
 														<span>{feature}</span>
-													</li>
+													</motion.li>
 												)
 											)}
 										</ul>
 									</div>
 
 									<div>
-										<h4 className="font-semibold mb-2 text-sm">
+										<h4 className="font-semibold mb-3 text-sm flex items-center gap-2">
+											<div className="w-2 h-2 bg-secondary rounded-full" />
 											Technologies:
 										</h4>
-										<div className="flex flex-wrap gap-1">
+										<div className="flex flex-wrap gap-2">
 											{project.technologies.map(
-												(tech) => (
-													<Badge
+												(tech, idx) => (
+													<motion.div
 														key={tech}
-														variant="outline"
-														className="text-xs"
+														initial={{
+															opacity: 0,
+															scale: 0.8,
+														}}
+														whileInView={{
+															opacity: 1,
+															scale: 1,
+														}}
+														viewport={{
+															once: true,
+														}}
+														transition={{
+															delay: idx * 0.05,
+														}}
+														whileHover={{
+															scale: 1.05,
+															transition: {
+																duration: 0.2,
+															},
+														}}
 													>
-														{tech}
-													</Badge>
+														<Badge
+															variant="outline"
+															className="text-xs bg-muted/50 hover:bg-primary/20 transition-all duration-200"
+														>
+															{tech}
+														</Badge>
+													</motion.div>
 												)
 											)}
 										</div>
 									</div>
 
-									<div className="flex space-x-2 pt-4 mt-auto">
-										<Button
-											size="sm"
-											variant="outline"
+									<div className="flex space-x-3 pt-4 mt-auto">
+										<motion.div
 											className="flex-1"
-											asChild
+											whileHover={{ scale: 1.02 }}
+											whileTap={{ scale: 0.98 }}
 										>
-											<a
-												href={project.githubUrl}
-												target="_blank"
-												rel="noopener noreferrer"
+											<Button
+												size="sm"
+												variant="outline"
+												className="w-full hover:bg-primary/10 transition-all duration-200"
+												asChild
 											>
-												<Github className="h-4 w-4 mr-2" />
-												Code
-											</a>
-										</Button>
-										<Button
-											size="sm"
+												<a
+													href={project.githubUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													<Github className="h-4 w-4 mr-2" />
+													Code
+												</a>
+											</Button>
+										</motion.div>
+										<motion.div
 											className="flex-1"
-											asChild
+											whileHover={{ scale: 1.02 }}
+											whileTap={{ scale: 0.98 }}
 										>
-											<a
-												href={project.liveUrl}
-												target="_blank"
-												rel="noopener noreferrer"
+											<Button
+												size="sm"
+												className={`w-full bg-gradient-to-r ${project.color} hover:opacity-90 transition-all duration-200`}
+												asChild
 											>
-												<ExternalLink className="h-4 w-4 mr-2" />
-												Live Demo
-											</a>
-										</Button>
+												<a
+													href={project.liveUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													<ExternalLink className="h-4 w-4 mr-2" />
+													Live Demo
+												</a>
+											</Button>
+										</motion.div>
 									</div>
 								</CardContent>
 							</Card>
@@ -248,21 +366,37 @@ export function Projects() {
 					viewport={{ once: true }}
 					transition={{ duration: 0.8, delay: 0.8 }}
 					variants={fadeInVariants}
-					className="text-center mt-12"
+					className="text-center mt-16"
 				>
-					<p className="text-muted-foreground mb-6">
+					<motion.p
+						className="text-muted-foreground mb-6 text-lg"
+						initial={{ opacity: 0, y: 10 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true }}
+						transition={{ delay: 0.2 }}
+					>
 						Want to see more of my work?
-					</p>
-					<Button variant="outline" size="lg" asChild>
-						<a
-							href="https://github.com/MET4L-DS"
-							target="_blank"
-							rel="noopener noreferrer"
+					</motion.p>
+					<motion.div
+						whileHover={{ scale: 1.05 }}
+						whileTap={{ scale: 0.95 }}
+					>
+						<Button
+							variant="outline"
+							size="lg"
+							className="bg-background/80 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300"
+							asChild
 						>
-							<Github className="h-5 w-5 mr-2" />
-							View All Projects on GitHub
-						</a>
-					</Button>
+							<a
+								href="https://github.com/MET4L-DS"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Github className="h-5 w-5 mr-2" />
+								View All Projects on GitHub
+							</a>
+						</Button>
+					</motion.div>
 				</motion.div>
 			</div>
 		</section>
