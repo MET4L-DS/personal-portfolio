@@ -153,7 +153,7 @@ export function Navigation() {
 								transition={{ delay: 0.1 * index + 0.3 }}
 								className={`relative text-sm font-medium transition-all duration-300 py-2 ${
 									activeSection === item.id
-										? "text-primary"
+										? "text-foreground"
 										: "text-foreground hover:text-primary"
 								}`}
 								onClick={() => setIsMenuOpen(false)}
