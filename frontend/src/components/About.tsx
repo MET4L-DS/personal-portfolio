@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Code2, Users, Target, Sparkles } from "lucide-react";
+import { GraduationCap, Code2, Users, Target } from "lucide-react";
 
 export function About() {
 	const fadeInVariants = {

@@ -1,21 +1,79 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail, Menu, X, Sparkles } from "lucide-react";
+import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function Navigation() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+	const [activeSection, setActiveSection] = useState("about");
+	const navRef = useRef<HTMLDivElement>(null);
+	const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 });
 
 	const navItems = [
-		{ name: "About", href: "#about" },
-		{ name: "Projects", href: "#projects" },
-		{ name: "Experience", href: "#experience" },
-		{ name: "Certifications", href: "#certifications" },
-		{ name: "Contact", href: "#contact" },
+		{ name: "About", href: "#about", id: "about" },
+		{ name: "Projects", href: "#projects", id: "projects" },
+		{ name: "Experience", href: "#experience", id: "experience" },
+		{
+			name: "Certifications",
+			href: "#certifications",
+			id: "certifications",
+		},
+		{ name: "Contact", href: "#contact", id: "contact" },
 	];
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+	// Intersection Observer to track active section
+	useEffect(() => {
+		const observerOptions = {
+			root: null,
+			rootMargin: "-20% 0px -80% 0px",
+			threshold: 0,
+		};
+
+		const observerCallback = (entries: IntersectionObserverEntry[]) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setActiveSection(entry.target.id);
+				}
+			});
+		};
+
+		const observer = new IntersectionObserver(
+			observerCallback,
+			observerOptions
+		);
+
+		// Observe all sections
+		navItems.forEach((item) => {
+			const section = document.getElementById(item.id);
+			if (section) {
+				observer.observe(section);
+			}
+		});
+
+		return () => observer.disconnect();
+	}, []);
+
+	// Update underline position when active section changes
+	useEffect(() => {
+		if (navRef.current) {
+			const activeNavItem = navRef.current.querySelector(
+				`[data-section="${activeSection}"]`
+			) as HTMLElement;
+			if (activeNavItem) {
+				const navContainer = navRef.current;
+				const containerRect = navContainer.getBoundingClientRect();
+				const activeRect = activeNavItem.getBoundingClientRect();
+
+				setUnderlineStyle({
+					width: activeRect.width,
+					left: activeRect.left - containerRect.left,
+				});
+			}
+		}
+	}, [activeSection]);
 
 	return (
 		<motion.nav
@@ -53,24 +111,42 @@ export function Navigation() {
 				</motion.div>
 
 				{/* Desktop Navigation */}
-				<div className="hidden md:flex space-x-8">
-					{navItems.map((item, index) => (
-						<motion.a
-							key={item.name}
-							href={item.href}
-							initial={{ opacity: 0, y: -20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.1 * index + 0.3 }}
-							className="relative text-sm font-medium transition-all duration-300 hover:text-primary group"
-							onClick={() => setIsMenuOpen(false)}
-						>
-							{item.name}
-							<motion.div
-								className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-purple-600 transition-all duration-300 group-hover:w-full"
-								whileHover={{ width: "100%" }}
-							/>
-						</motion.a>
-					))}
+				<div className="hidden md:flex relative" ref={navRef}>
+					<div className="flex space-x-8">
+						{navItems.map((item, index) => (
+							<motion.a
+								key={item.name}
+								href={item.href}
+								data-section={item.id}
+								initial={{ opacity: 0, y: -20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.1 * index + 0.3 }}
+								className={`relative text-sm font-medium transition-all duration-300 py-2 ${
+									activeSection === item.id
+										? "text-primary"
+										: "text-foreground hover:text-primary"
+								}`}
+								onClick={() => setIsMenuOpen(false)}
+							>
+								{item.name}
+							</motion.a>
+						))}
+					</div>
+
+					{/* Sliding underline */}
+					<motion.div
+						className="absolute bottom-0 h-0.5 bg-gradient-to-r from-primary to-purple-600 rounded-full"
+						initial={false}
+						animate={{
+							width: underlineStyle.width,
+							x: underlineStyle.left,
+						}}
+						transition={{
+							type: "spring",
+							stiffness: 300,
+							damping: 30,
+						}}
+					/>
 				</div>
 
 				{/* Desktop Social Links */}
@@ -177,7 +253,11 @@ export function Navigation() {
 									: { opacity: 0, x: -20 }
 							}
 							transition={{ delay: index * 0.1 }}
-							className="block text-sm font-medium transition-colors hover:text-primary py-2"
+							className={`block text-sm font-medium transition-colors py-2 ${
+								activeSection === item.id
+									? "text-primary border-l-2 border-primary pl-4"
+									: "text-foreground hover:text-primary"
+							}`}
 							onClick={() => setIsMenuOpen(false)}
 						>
 							{item.name}
