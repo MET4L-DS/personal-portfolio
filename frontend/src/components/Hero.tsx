@@ -138,7 +138,6 @@ export function Hero() {
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.7 }}
 						>
-							Hi, I'm{" "}
 							<motion.span
 								className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent"
 								animate={{
@@ -154,7 +153,7 @@ export function Hero() {
 									ease: "easeInOut",
 								}}
 							>
-								Ayanshu
+								Hi, I'm Ayanshu
 							</motion.span>
 						</motion.h1>
 					</motion.div>
