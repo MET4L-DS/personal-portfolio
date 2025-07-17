@@ -171,3 +171,24 @@
 .gradient-text {
 	@apply bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent;
 }
+
+/* Hide default scrollbar */
+/* For webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+	display: none;
+}
+
+/* For Firefox */
+* {
+	scrollbar-width: none;
+}
+
+/* For Internet Explorer and Edge */
+body {
+	-ms-overflow-style: none;
+}
+
+/* Ensure scrolling still works */
+html {
+	scroll-behavior: smooth;
+}

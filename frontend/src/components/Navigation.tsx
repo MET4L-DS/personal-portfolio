@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -9,6 +9,21 @@ export function Navigation() {
 	const [activeSection, setActiveSection] = useState("about");
 	const navRef = useRef<HTMLDivElement>(null);
 	const [underlineStyle, setUnderlineStyle] = useState({ width: 0, left: 0 });
+
+	// Scroll progress tracking
+	const { scrollYProgress } = useScroll();
+	const scaleX = useSpring(scrollYProgress, {
+		stiffness: 100,
+		damping: 30,
+		restDelta: 0.001,
+	});
+
+	// Add a subtle pulse animation to the progress bar
+	const progressGlow = useSpring(scrollYProgress, {
+		stiffness: 200,
+		damping: 25,
+		restDelta: 0.001,
+	});
 
 	const navItems = [
 		{ name: "About", href: "#about", id: "about" },
@@ -82,6 +97,21 @@ export function Navigation() {
 			transition={{ duration: 0.8 }}
 			className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50 shadow-lg"
 		>
+			{/* Scroll Progress Bar */}
+			<motion.div
+				className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 origin-left shadow-lg"
+				style={{ scaleX }}
+			/>
+
+			{/* Glowing effect for progress bar */}
+			<motion.div
+				className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/50 via-purple-500/50 to-pink-500/50 origin-left blur-sm"
+				style={{
+					scaleX: progressGlow,
+					opacity: scrollYProgress,
+				}}
+			/>
+
 			{/* Animated background gradient */}
 			<div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5" />
 
