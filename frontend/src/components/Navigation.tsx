@@ -148,7 +148,7 @@ export function Navigation() {
 							ease: "easeInOut",
 						}}
 					>
-						ADS
+						MET4l.DS
 					</motion.span>
 				</motion.div>
 
