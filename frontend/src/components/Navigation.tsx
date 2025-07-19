@@ -39,6 +39,18 @@ export function Navigation() {
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+	// Handle mobile navigation clicks
+	const handleMobileNavClick = (href: string) => {
+		setIsMenuOpen(false);
+		// Use setTimeout to ensure menu closes before navigation
+		setTimeout(() => {
+			const element = document.querySelector(href);
+			if (element) {
+				element.scrollIntoView({ behavior: "smooth" });
+			}
+		}, 300);
+	};
+
 	// Intersection Observer to track active section
 	useEffect(() => {
 		const observerOptions = {
@@ -136,7 +148,7 @@ export function Navigation() {
 							ease: "easeInOut",
 						}}
 					>
-						Ayanshu Dev Sikdar
+						ADS
 					</motion.span>
 				</motion.div>
 
@@ -273,9 +285,9 @@ export function Navigation() {
 			>
 				<div className="container mx-auto px-4 py-4 space-y-4">
 					{navItems.map((item, index) => (
-						<motion.a
+						<motion.button
 							key={item.name}
-							href={item.href}
+							data-section={item.id}
 							initial={{ opacity: 0, x: -20 }}
 							animate={
 								isMenuOpen
@@ -283,15 +295,15 @@ export function Navigation() {
 									: { opacity: 0, x: -20 }
 							}
 							transition={{ delay: index * 0.1 }}
-							className={`block text-sm font-medium transition-colors py-2 ${
+							className={`block w-full text-left text-sm font-medium transition-colors py-2 bg-transparent border-none cursor-pointer ${
 								activeSection === item.id
 									? "text-primary border-l-2 border-primary pl-4"
 									: "text-foreground hover:text-primary"
 							}`}
-							onClick={() => setIsMenuOpen(false)}
+							onClick={() => handleMobileNavClick(item.href)}
 						>
 							{item.name}
-						</motion.a>
+						</motion.button>
 					))}
 
 					<div className="flex space-x-4 pt-4 border-t border-border/50">
