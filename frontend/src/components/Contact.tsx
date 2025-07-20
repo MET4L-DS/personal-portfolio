@@ -22,14 +22,14 @@ export function Contact() {
 		{
 			icon: Mail,
 			label: "Email",
-			value: "ayanshu.dev@example.com",
-			href: "mailto:ayanshu.dev@example.com",
+			value: "tomdevsikdar@gmail.com",
+			href: "mailto:tomdevsikdar@gmail.com",
 		},
 		{
 			icon: Phone,
 			label: "Phone",
-			value: "+91 XXXXX XXXXX",
-			href: "tel:+91XXXXXXXXX",
+			value: "+91 60012 57061",
+			href: "tel:+916001257061",
 		},
 		{
 			icon: MapPin,
@@ -55,7 +55,7 @@ export function Contact() {
 		{
 			icon: Mail,
 			label: "Email",
-			href: "mailto:ayanshu.dev@example.com",
+			href: "mailto:tomdevsikdar@gmail.com",
 			color: "hover:text-green-600",
 		},
 	];
