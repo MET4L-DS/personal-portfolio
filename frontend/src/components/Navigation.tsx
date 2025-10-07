@@ -56,15 +56,20 @@ export function Navigation() {
 		const observerOptions = {
 			root: null,
 			rootMargin: "-20% 0px -80% 0px",
-			threshold: 0,
+			threshold: 0.1,
 		};
 
 		const observerCallback = (entries: IntersectionObserverEntry[]) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					setActiveSection(entry.target.id);
-				}
-			});
+			// Find the entry with the highest intersection ratio
+			let mostVisibleEntry = entries.reduce((prev, current) =>
+				current.intersectionRatio > prev.intersectionRatio
+					? current
+					: prev
+			);
+
+			if (mostVisibleEntry.isIntersecting) {
+				setActiveSection(mostVisibleEntry.target.id);
+			}
 		};
 
 		const observer = new IntersectionObserver(
@@ -72,34 +77,72 @@ export function Navigation() {
 			observerOptions
 		);
 
-		// Observe all sections
-		navItems.forEach((item) => {
-			const section = document.getElementById(item.id);
-			if (section) {
-				observer.observe(section);
-			}
-		});
+		// Observe all sections with a small delay to ensure DOM is ready
+		setTimeout(() => {
+			navItems.forEach((item) => {
+				const section = document.getElementById(item.id);
+				if (section) {
+					observer.observe(section);
+				}
+			});
+		}, 100);
 
 		return () => observer.disconnect();
 	}, []);
 
+	// Initialize underline position on mount
+	useEffect(() => {
+		const initializeUnderline = () => {
+			if (navRef.current) {
+				const activeNavItem = navRef.current.querySelector(
+					`[data-section="${activeSection}"]`
+				) as HTMLElement;
+				if (activeNavItem) {
+					const navContainer = navRef.current;
+					const containerRect = navContainer.getBoundingClientRect();
+					const activeRect = activeNavItem.getBoundingClientRect();
+
+					setUnderlineStyle({
+						width: activeRect.width,
+						left: activeRect.left - containerRect.left,
+					});
+				}
+			}
+		};
+
+		// Wait for components to mount and render
+		setTimeout(initializeUnderline, 100);
+	}, []);
+
 	// Update underline position when active section changes
 	useEffect(() => {
-		if (navRef.current) {
-			const activeNavItem = navRef.current.querySelector(
-				`[data-section="${activeSection}"]`
-			) as HTMLElement;
-			if (activeNavItem) {
-				const navContainer = navRef.current;
-				const containerRect = navContainer.getBoundingClientRect();
-				const activeRect = activeNavItem.getBoundingClientRect();
+		const updateUnderlinePosition = () => {
+			if (navRef.current) {
+				const activeNavItem = navRef.current.querySelector(
+					`[data-section="${activeSection}"]`
+				) as HTMLElement;
+				if (activeNavItem) {
+					const navContainer = navRef.current;
+					const containerRect = navContainer.getBoundingClientRect();
+					const activeRect = activeNavItem.getBoundingClientRect();
 
-				setUnderlineStyle({
-					width: activeRect.width,
-					left: activeRect.left - containerRect.left,
-				});
+					setUnderlineStyle({
+						width: activeRect.width,
+						left: activeRect.left - containerRect.left,
+					});
+				}
 			}
-		}
+		};
+
+		// Use requestAnimationFrame to ensure DOM is updated
+		requestAnimationFrame(updateUnderlinePosition);
+
+		// Also update on window resize
+		window.addEventListener("resize", updateUnderlinePosition);
+
+		return () => {
+			window.removeEventListener("resize", updateUnderlinePosition);
+		};
 	}, [activeSection]);
 
 	return (
