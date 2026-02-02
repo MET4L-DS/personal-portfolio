@@ -19,33 +19,6 @@ export function Projects() {
 
 	const projects = [
 		{
-			title: "Pharmacy Management System",
-			description:
-				"A comprehensive web-based pharmacy management system designed for medical stores in India. Built as part of MCA coursework, it provides complete inventory management, billing, medicine tracking, and customer service automation with real-time stock monitoring and expiry alerts.",
-			icon: Activity,
-			technologies: [
-				"React.js",
-				"TypeScript",
-				"Django",
-				"MySQL",
-				"TailwindCSS",
-				"ShadCN UI",
-				"Vite",
-				"Django REST Framework",
-			],
-			features: [
-				"Complete inventory management with batch tracking",
-				"Real-time stock monitoring with low stock alerts",
-				"Medicine search with API integration for suggestions",
-				"Responsive design with dark/light theme support",
-				"GST & HSN code support for Indian tax compliance",
-				"Interactive dashboard with analytics and insights",
-			],
-			githubUrl: "https://github.com/berealatul/projectDBMS",
-			liveUrl: "#",
-			color: "from-green-500 to-blue-500",
-		},
-		{
 			title: "Legal-Assist",
 			description:
 				"A victim-centric AI legal assistance platform designed to help users understand Indian laws, legal procedures, and emergency actions using natural language queries. Specializes in Indian legal texts including BNS (2023), BNSS, BSA, and NALSA schemes.",
@@ -71,6 +44,33 @@ export function Projects() {
 			githubUrl: "https://github.com/MET4L-DS/Legal-RAG-engine",
 			liveUrl: "https://legal-assist-v3.vercel.app/",
 			color: "from-blue-500 to-cyan-500",
+		},
+		{
+			title: "Pharmacy Management System",
+			description:
+				"A comprehensive web-based pharmacy management system designed for medical stores in India. Built as part of MCA coursework, it provides complete inventory management, billing, medicine tracking, and customer service automation with real-time stock monitoring and expiry alerts.",
+			icon: Activity,
+			technologies: [
+				"React.js",
+				"TypeScript",
+				"Django",
+				"MySQL",
+				"TailwindCSS",
+				"ShadCN UI",
+				"Vite",
+				"Django REST Framework",
+			],
+			features: [
+				"Complete inventory management with batch tracking",
+				"Real-time stock monitoring with low stock alerts",
+				"Medicine search with API integration for suggestions",
+				"Responsive design with dark/light theme support",
+				"GST & HSN code support for Indian tax compliance",
+				"Interactive dashboard with analytics and insights",
+			],
+			githubUrl: "https://github.com/berealatul/projectDBMS",
+			liveUrl: "#",
+			color: "from-green-500 to-blue-500",
 		},
 		{
 			title: "Kanha-GPT",

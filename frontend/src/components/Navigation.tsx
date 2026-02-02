@@ -51,80 +51,44 @@ export function Navigation() {
 		}, 300);
 	};
 
-	// Intersection Observer to track active section
+	// Scroll spy logic
 	useEffect(() => {
-		const observerOptions = {
-			root: null,
-			rootMargin: "-20% 0px -80% 0px",
-			threshold: 0.1,
-		};
+		const handleScroll = () => {
+			const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-		const observerCallback = (entries: IntersectionObserverEntry[]) => {
-			// Find the entry with the highest intersection ratio
-			let mostVisibleEntry = entries.reduce((prev, current) =>
-				current.intersectionRatio > prev.intersectionRatio
-					? current
-					: prev
-			);
-
-			if (mostVisibleEntry.isIntersecting) {
-				setActiveSection(mostVisibleEntry.target.id);
-			}
-		};
-
-		const observer = new IntersectionObserver(
-			observerCallback,
-			observerOptions
-		);
-
-		// Observe all sections with a small delay to ensure DOM is ready
-		setTimeout(() => {
-			navItems.forEach((item) => {
+			for (const item of navItems) {
 				const section = document.getElementById(item.id);
 				if (section) {
-					observer.observe(section);
-				}
-			});
-		}, 100);
-
-		return () => observer.disconnect();
-	}, []);
-
-	// Initialize underline position on mount
-	useEffect(() => {
-		const initializeUnderline = () => {
-			if (navRef.current) {
-				const activeNavItem = navRef.current.querySelector(
-					`[data-section="${activeSection}"]`
-				) as HTMLElement;
-				if (activeNavItem) {
-					const navContainer = navRef.current;
-					const containerRect = navContainer.getBoundingClientRect();
-					const activeRect = activeNavItem.getBoundingClientRect();
-
-					setUnderlineStyle({
-						width: activeRect.width,
-						left: activeRect.left - containerRect.left,
-					});
+					const { offsetTop, offsetHeight } = section;
+					if (
+						scrollPosition >= offsetTop &&
+						scrollPosition < offsetTop + offsetHeight
+					) {
+						setActiveSection(item.id);
+						break;
+					}
 				}
 			}
 		};
 
-		// Wait for components to mount and render
-		setTimeout(initializeUnderline, 100);
+		window.addEventListener("scroll", handleScroll);
+		// Call once to set initial state
+		handleScroll();
+
+		return () => window.removeEventListener("scroll", handleScroll);
 	}, []);
 
-	// Update underline position when active section changes
+	// Initialize and update underline position
 	useEffect(() => {
 		const updateUnderlinePosition = () => {
 			if (navRef.current) {
 				const activeNavItem = navRef.current.querySelector(
-					`[data-section="${activeSection}"]`
+					`[data-section="${activeSection}"]`,
 				) as HTMLElement;
 				if (activeNavItem) {
 					const navContainer = navRef.current;
-					const containerRect = navContainer.getBoundingClientRect();
 					const activeRect = activeNavItem.getBoundingClientRect();
+					const containerRect = navContainer.getBoundingClientRect();
 
 					setUnderlineStyle({
 						width: activeRect.width,
