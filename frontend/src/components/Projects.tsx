@@ -46,27 +46,30 @@ export function Projects() {
 			color: "from-green-500 to-blue-500",
 		},
 		{
-			title: "LawGPT",
+			title: "Legal-Assist",
 			description:
-				"A responsive legal-advice platform built with React, LangChain.js, FAISS for RAG, Firebase authentication, and GCP deployment. Provides accurate and contextually relevant legal guidance based on Indian laws and Bharatiya Nyaya Sanhita (BNS).",
+				"A victim-centric AI legal assistance platform designed to help users understand Indian laws, legal procedures, and emergency actions using natural language queries. Specializes in Indian legal texts including BNS (2023), BNSS, BSA, and NALSA schemes.",
 			icon: Brain,
 			technologies: [
-				"React.js",
-				"LangChain.js",
+				"Next.js",
+				"React",
+				"TypeScript",
+				"FastAPI",
+				"Python",
+				"Gemini API",
 				"FAISS",
-				"Firebase",
 				"TailwindCSS",
-				"GCP",
 			],
 			features: [
-				"Retrieval-Augmented Generation (RAG) implementation",
-				"Real-time legal advice based on Indian laws",
-				"Secure Firebase authentication",
-				"Responsive design with TailwindCSS",
-				"Deployed on Google Cloud Platform",
+				"High-precision RAG engine (FAISS + BM25 + RRF)",
+				"Multi-model LLM orchestration (Gemini + Gemma 27B)",
+				"Stateful legal document parser with hierarchical context",
+				"Victim-safety intelligence & emergency action plans",
+				"Accurate citation of legal sections (BNS, BNSS, BSA)",
+				"Interactive chat interface with citation side-panels",
 			],
-			githubUrl: "https://github.com/MET4L-DS/AskMe",
-			liveUrl: "https://law-gpt.netlify.app/",
+			githubUrl: "https://github.com/MET4L-DS/Legal-RAG-engine",
+			liveUrl: "https://legal-assist-v3.vercel.app/",
 			color: "from-blue-500 to-cyan-500",
 		},
 		{
@@ -263,7 +266,7 @@ export function Projects() {
 														</span>
 														<span>{feature}</span>
 													</motion.li>
-												)
+												),
 											)}
 										</ul>
 									</div>
@@ -306,7 +309,7 @@ export function Projects() {
 															{tech}
 														</Badge>
 													</motion.div>
-												)
+												),
 											)}
 										</div>
 									</div>
