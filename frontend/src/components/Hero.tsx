@@ -247,7 +247,7 @@ export function Hero() {
 										}}
 									/>
 									<motion.img
-										src="/profile-pic.jpg"
+										src="/profile-pic-1.jpeg"
 										alt="Ayanshu Dev Sikdar"
 										className="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full object-cover border-4 border-primary/50 shadow-2xl"
 										whileHover={{

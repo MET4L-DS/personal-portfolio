@@ -9,6 +9,8 @@ import {
 	MessageCircle,
 	Activity,
 	User,
+	Scale,
+	GraduationCap,
 } from "lucide-react";
 
 export function Projects() {
@@ -18,6 +20,34 @@ export function Projects() {
 	};
 
 	const projects = [
+		{
+			title: "Vectorless-RAG Engine",
+			description:
+				"A highly precise statutory and Standard Operating Procedures (SOP) query resolver. Indexes legal texts into native hierarchical trees (Acts → Chapters → Sections) and applies guided traversal logic with keyword indexing (BM25) to retrieve exact content with 100% groundedness.",
+			icon: Scale,
+			technologies: [
+				"Python",
+				"LangGraph",
+				"FastAPI",
+				"Gemini API",
+				"BM25 Search",
+				"Pydantic",
+				"PyMuPDF",
+				"Hugging Face Spaces",
+			],
+			features: [
+				"Dual Pipelines: Deterministic State Machine & ReAct Agent Loop",
+				"Native hierarchical tree indexing (Acts → Chapters → Sections)",
+				"LangChain Structured Outputs with Pydantic schema validation",
+				"Coordinate-based PDF layout parser resolving borderless schedules",
+				"Cross-reference resolution linking procedures to statutes",
+				"Rate-limited model pool (Gemini & Gemma) with async leaky bucket",
+				"Reasoning traces streamed live using custom Rich CLI",
+			],
+			githubUrl: "https://github.com/MET4L-DS/Vectorless-RAG",
+			liveUrl: "https://legal-assist-agent.vercel.app/",
+			color: "from-emerald-500 to-teal-500",
+		},
 		{
 			title: "Legal-Assist",
 			description:
@@ -44,6 +74,36 @@ export function Projects() {
 			githubUrl: "https://github.com/MET4L-DS/Legal-RAG-engine",
 			liveUrl: "https://legal-assist-v3.vercel.app/",
 			color: "from-blue-500 to-cyan-500",
+		},
+
+		{
+			title: "OBEMS",
+			description:
+				"A comprehensive Outcome Based Education (OBE) management system tailored for National Board of Accreditation (NBA) compliance. It automates Course Outcome (CO) mapping, student performance tracking, and direct/indirect attainment calculation.",
+			icon: GraduationCap,
+			technologies: [
+				"React 19",
+				"TypeScript",
+				"Vite 6",
+				"TailwindCSS",
+				"ShadCN UI",
+				"PHP 8.x",
+				"MySQL",
+				"JWT Auth",
+				"ExcelJS",
+			],
+			features: [
+				"Role-Based Access Control (RBAC) with 5 distinct dashboards",
+				"Dynamic CO-PO/PSO mapping matrix with real-time feedback",
+				"Automated Direct and Indirect attainment level calculation",
+				"High-performance spreadsheet-style bulk marks entry",
+				"Comprehensive department and school-level audit log viewers",
+				"Interactive analytics charts powered by Recharts",
+				"Seamless Excel (xlsx) and CSV data import/export utilities",
+			],
+			githubUrl: "https://github.com/MET4L-DS/nba",
+			liveUrl: "#",
+			color: "from-blue-600 to-indigo-600",
 		},
 		{
 			title: "Pharmacy Management System",
