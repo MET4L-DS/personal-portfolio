@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
 	Mail,
-	Phone,
+	// Phone,
 	MapPin,
 	Github,
 	Linkedin,
@@ -25,16 +25,16 @@ export function Contact() {
 			value: "tomdevsikdar@gmail.com",
 			href: "mailto:tomdevsikdar@gmail.com",
 		},
-		{
-			icon: Phone,
-			label: "Phone",
-			value: "+91 60012 57061",
-			href: "tel:+916001257061",
-		},
+		// {
+		// 	icon: Phone,
+		// 	label: "Phone",
+		// 	value: "+91 60012 57061",
+		// 	href: "tel:+916001257061",
+		// },
 		{
 			icon: MapPin,
 			label: "Location",
-			value: "Tezpur, Assam, India",
+			value: "Guwahati, Assam, India",
 			href: "#",
 		},
 	];
